@@ -8,11 +8,17 @@ jobs:
   runs-on: ubuntu-latest
   steps:
       - name: First Step
+        id: first-step
         run: |
          SECRET=$((RANDOM))
          echo $SECRET
          echo "::add-mask::$SECRET"
          echo "SECRET_NUMBER=$SECRET" >> "$GITHUB_OUTPUT"
+
+      - name: Second Step
+        id: second-step
+        run: |
+         echo "the secret number is ${{ steps.first-step.outputs.SECRET_NUMBER }}"
   
       # - run: echo "🎉 The job was AUTOMATICALLY TRIGGERED by a ${{ github.event_name }} event."
   #     - name: List files in the repository
