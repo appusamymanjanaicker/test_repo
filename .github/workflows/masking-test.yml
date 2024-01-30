@@ -1,5 +1,9 @@
 name: Masking Test
 on: workflow_dispatch
+permissions:
+ contents: write
+ packages: write
+ checks: write
 
 jobs:
   secret-consumer:
