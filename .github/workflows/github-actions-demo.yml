@@ -10,7 +10,7 @@ jobs:
       - name: First Step
         run: |
          MESSAGE= Hello World
-         echo $MESSAGE
+         echo "$MESSAGE"
   
       # - run: echo "🎉 The job was AUTOMATICALLY TRIGGERED by a ${{ github.event_name }} event."
   #     - name: List files in the repository
