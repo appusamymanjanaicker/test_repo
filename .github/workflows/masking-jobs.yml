@@ -2,28 +2,16 @@ name: Masking between Jobs
 # run-name: Masking Between Jobs
 on:
  workflow_dispatch:
- 
 jobs:
- FirstJob:
-  runs-on: ubuntu-latest
-  steps:
-      - name: First Step
-        id: first-step
-        run: |
-         SECRET=$((RANDOM))
-         echo "::add-mask::$SECRET"
-         echo "SECRET_NUMBER=$SECRET" >> "$GITHUB_OUTPUT"
-        continue-on-error: true
-
-      - name: Second Step
-        id: second-step
-        run: |
-         SECRET_HERE= ${{ steps.first-step.outputs.SECRET_NUMBER }}
-         # echo "the secret number is $SECRET_HERE"
-        continue-on-error: true
-  
-      # - run: echo "🎉 The job was AUTOMATICALLY TRIGGERED by a ${{ github.event_name }} event."
-  #     - name: List files in the repository
-  #       run: |
-  #         ls ${{ github.workspace }}
-  #     - run: echo "🍏 This job's status is ${{ job.status }}."
+  secret-generator:
+    runs-on: ubuntu-latest
+    env:
+     ENCRYPT_PASSPHRASE: PASSSWORD
+    steps:
+    - name: generate secret
+      id: generate-secret
+      run: |
+        GENERATED_SECRET=$((RANDOM))
+        # echo "::add-mask::$GENERATED_SECRET"
+        SECRET_HANDLE=$(gpg --symmetric --batch --passphrase "$ENCRYPT_PASSPHRASE" --output - <(echo "$GENERATED_SECRET") | base64 -w0)
+        echo "handle=$SECRET_HANDLE" >> "$GITHUB_OUTPUT"
