@@ -8,7 +8,9 @@ jobs:
   runs-on: ubuntu-latest
   steps:
       - name: First Step
-        run: echo "Hello World"
+        run: |
+         MESSAGE= Hello World
+         echo $MESSAGE
   
       # - run: echo "🎉 The job was AUTOMATICALLY TRIGGERED by a ${{ github.event_name }} event."
   #     - name: List files in the repository
