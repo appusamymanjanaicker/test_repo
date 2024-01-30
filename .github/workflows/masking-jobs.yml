@@ -13,12 +13,14 @@ jobs:
          SECRET=$((RANDOM))
          echo "::add-mask::$SECRET"
          echo "SECRET_NUMBER=$SECRET" >> "$GITHUB_OUTPUT"
+        continue-on-error: true
 
       - name: Second Step
         id: second-step
         run: |
          SECRET_HERE= ${{ steps.first-step.outputs.SECRET_NUMBER }}
-         echo "the secret number is $SECRET_HERE"
+         # echo "the secret number is $SECRET_HERE"
+        continue-on-error: true
   
       # - run: echo "🎉 The job was AUTOMATICALLY TRIGGERED by a ${{ github.event_name }} event."
   #     - name: List files in the repository
