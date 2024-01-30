@@ -12,7 +12,7 @@ jobs:
      ENCRYPT_PASSPHRASE: ${{ secrets.REPO_PASSPHRASE }}
     steps:
     - name: Checkout Repo
-      uses: actions/checkout@V2
+      uses: actions/checkout@v2
       
     - name: use secret
       uses: ./.github/workflows/reusable-workflow.yml
