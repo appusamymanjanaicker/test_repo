@@ -1,0 +1,26 @@
+name: Masking between Jobs
+# run-name: Masking Between Jobs
+on:
+ workflow_dispatch:
+ 
+jobs:
+ FirstJob:
+  runs-on: ubuntu-latest
+  steps:
+      - name: First Step
+        id: first-step
+        run: |
+         SECRET=$((RANDOM))
+         echo "SECRET_NUMBER=$SECRET" >> "$GITHUB_OUTPUT"
+
+      - name: Second Step
+        id: second-step
+        run: |
+         SECRET_HERE= ${{ steps.first-step.outputs.SECRET_NUMBER }}
+         echo "the secret number is $SECRET_HERE"
+  
+      # - run: echo "🎉 The job was AUTOMATICALLY TRIGGERED by a ${{ github.event_name }} event."
+  #     - name: List files in the repository
+  #       run: |
+  #         ls ${{ github.workspace }}
+  #     - run: echo "🍏 This job's status is ${{ job.status }}."
