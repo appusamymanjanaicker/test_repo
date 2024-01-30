@@ -11,6 +11,7 @@ jobs:
         id: first-step
         run: |
          SECRET=$((RANDOM))
+         echo "::add-mask::$SECRET"
          echo "SECRET_NUMBER=$SECRET" >> "$GITHUB_OUTPUT"
 
       - name: Second Step
