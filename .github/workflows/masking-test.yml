@@ -8,7 +8,7 @@ jobs:
      ENCRYPT_PASSPHRASE: ${{ secrets.REPO_PASSPHRASE }}
     steps:
     - name: use secret
-      uses: ./.github/workflows/reusable-workflow.yml
+      uses: https://github.com/appusamymanjanaicker/test_repo/blob/main/.github/workflows/reusable-workflow.yml@main
       with:
        config-path: PASS
 
