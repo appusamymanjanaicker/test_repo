@@ -27,7 +27,7 @@ jobs:
     - name: use secret
       id: use-secret
       run: |
-        SECRET_HANDLE="${{ needs.secret-generator.outputs.handle }}"
+        echo "::add-mask::${{ needs.secret-generator.outputs.handle }}"
 
 
     
