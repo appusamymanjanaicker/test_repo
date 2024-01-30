@@ -2,28 +2,13 @@ name: Masking Test
 on: workflow_dispatch
 
 jobs:
-  secret-generator:
-    runs-on: ubuntu-latest
-    env:
-     ENCRYPT_PASSPHRASE: ${{ secrets.REPO_PASSPHRASE }}
-    outputs:
-      handle: ${{ steps.generate-secret.outputs.handle }}
-    steps:
-    - name: generate secret
-      id: generate-secret
-      shell: bash
-      run: |
-        GENERATED_SECRET=$((RANDOM))
-        echo "::add-mask::$GENERATED_SECRET"
-        SECRET_HANDLE=$(gpg --symmetric --batch --passphrase "$ENCRYPT_PASSPHRASE" --output - <(echo "$GENERATED_SECRET") | base64 -w0)
-        echo "handle=$SECRET_HANDLE" >> "$GITHUB_OUTPUT"
   secret-consumer:
     runs-on: ubuntu-latest
     env:
      ENCRYPT_PASSPHRASE: ${{ secrets.REPO_PASSPHRASE }}
-    needs: secret-generator
     steps:
     - name: use secret
-      shell: bash
-      run: |
-        SECRET_HANDLE="${{ needs.secret-generator.outputs.handle }}"
+      uses: ./.github/workflows/reusable-workflow.yml
+      with:
+       input: PASS
+
