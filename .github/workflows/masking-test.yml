@@ -13,9 +13,8 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
-      
-    - name: use secret
-      uses: ./.github/workflows/reusable-workflow.yml
+
+    - uses: ./.github/workflows/reusable-workflow.yml
       with:
-       config-path: PASS
+       config-path: TEST
 
