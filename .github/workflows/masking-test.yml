@@ -7,8 +7,11 @@ jobs:
     env:
      ENCRYPT_PASSPHRASE: ${{ secrets.REPO_PASSPHRASE }}
     steps:
+    - name: Checkout Repo
+      uses: actions/checkout@V2
+      
     - name: use secret
-      uses: appusamymanjanaicker/test_repo/blob/main/.github/workflows/reusable-workflow.yml@main
+      uses: ./.github/workflows/reusable-workflow.yml
       with:
        config-path: PASS
 
