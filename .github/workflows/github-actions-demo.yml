@@ -9,9 +9,8 @@ jobs:
   steps:
       - name: First Step
         run: |
-         MSG="Hello World"
-         MASKED_MSG="::add-mask::$MSG"
-         echo $MASKED_MSG
+         SECRET=$((RANDOM))
+         echo $SECRET
   
       # - run: echo "🎉 The job was AUTOMATICALLY TRIGGERED by a ${{ github.event_name }} event."
   #     - name: List files in the repository
