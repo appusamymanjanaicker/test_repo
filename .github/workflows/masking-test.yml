@@ -10,5 +10,5 @@ jobs:
     - name: use secret
       uses: ./.github/workflows/reusable-workflow.yml
       with:
-       input: PASS
+       config-path: PASS
 
